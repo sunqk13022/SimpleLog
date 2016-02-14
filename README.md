@@ -1,0 +1,2 @@
+# SimpleLog
+for c++ 
