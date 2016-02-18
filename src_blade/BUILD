@@ -3,10 +3,13 @@ cc_library(
    srcs=[
      'log_stream.cc',
      'time_stamp.cc',
+     'logging.cc',
+     'log_file.cc',
    ],
    deps=[
      '//thirdparty/gflags:gflags',
      '//thirdparty/glog:glog',
+     '//simple_log/thread:simple_thread',
      '#rt',
    ],
 )
@@ -16,6 +19,7 @@ cc_test(
     srcs = [
         'log_stream_test.cc',
         'time_stamp_test.cc',
+        'logging_test.cc',
     ],
     deps = [
         ':simple_log',

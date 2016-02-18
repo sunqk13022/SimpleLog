@@ -21,11 +21,12 @@ void benchPrintf(const char* fmt) {
   }
 
   Timestamp end(Timestamp::now());
-  printf("benchPrintf use time=%f\n", timeDifference(end, start));
+  //printf("benchPrintf use time=%f\n", timeDifference(end, start));
 }
 
 template<typename T>
 void benchStringStream() {
+  char buf[32];
   Timestamp start(Timestamp::now());
 
   std::ostringstream os;
@@ -35,11 +36,12 @@ void benchStringStream() {
   }
 
   Timestamp end(Timestamp::now());
-  printf("benchStringStream use time=%f\n", timeDifference(end, start));
+  //printf("benchStringStream use time=%f\n", timeDifference(end, start));
 }
 
 template<typename T>
 void benchLogStream() {
+  char buf[32];
   Timestamp start(Timestamp::now());
 
   LogStream os;
@@ -49,26 +51,26 @@ void benchLogStream() {
   }
 
   Timestamp end(Timestamp::now());
-  printf("benchLogStream use time=%f\n", timeDifference(end, start));
+  //printf("benchLogStream use time=%f\n", timeDifference(end, start));
 }
 
 TEST(LogStreamBench, Int) {
-  LOG(ERROR) << "bench int";
+  //LOG(ERROR) << "bench int";
   benchPrintf<int>("%d");
   benchStringStream<int>();
   benchLogStream<int>();
 
-  LOG(ERROR) << "bench double";
+  //LOG(ERROR) << "bench double";
   benchPrintf<double>("%.12g");
   benchStringStream<double>();
   benchLogStream<double>();
 
-  LOG(ERROR) << "bench int64_t";
+  //LOG(ERROR) << "bench int64_t";
   benchPrintf<int64_t>("%ld");
   benchStringStream<int64_t>();
   benchLogStream<int64_t>();
 
-  LOG(ERROR) << "bench void*";
+  //LOG(ERROR) << "bench void*";
   benchPrintf<void*>("%p");
   benchStringStream<void*>();
   benchLogStream<void*>();
