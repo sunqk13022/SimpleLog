@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <time.h>
+#include <iostream>
 
 namespace simple_log {
 
@@ -98,6 +99,7 @@ void LogFile::flush() {
 void LogFile::append_unlocked(const char* logline, int len) {
   file_->append(logline, len);
 
+  //std::cout << "writen =" << file_->writtenBtyes() << ", rowsize=" << rollSize_ << std::endl;
   if (file_->writtenBtyes() > rollSize_) {
     rollFile();
   } else {
