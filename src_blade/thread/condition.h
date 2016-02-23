@@ -2,7 +2,7 @@
 #define THREAD_CONDITION_H
 
 #include <boost/noncopyable.hpp>
-#include <phtread.h>
+#include <pthread.h>
 #include <errno.h>
 
 #include "mutex.h"

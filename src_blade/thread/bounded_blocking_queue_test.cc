@@ -2,7 +2,7 @@
 #include "thirdparty/glog/logging.h"
 
 #include "thread.h"
-#include "blocking_queue.h"
+#include "bounded_blocking_queue.h"
 #include "count_down_latch.h"
 
 #include <boost/bind.hpp>
@@ -12,17 +12,18 @@
 
 namespace simple_log {
 
-class QueueServer {
+class QueueServer2 {
  public:
-  QueueServer(int numThreads)
+  QueueServer2(int numThreads)
     : latch_(numThreads),
+      queue_(20),
       threads_(numThreads)
   {
     for (int i = 0; i < numThreads; ++i) {
       char name[32];
       snprintf(name, sizeof(name), "work thread %d", i);
       threads_.push_back(new Thread(
-          boost::bind(&QueueServer::threadFunc, this), std::string(name)
+          boost::bind(&QueueServer2::threadFunc, this), std::string(name)
       ));
     }
 
@@ -64,14 +65,14 @@ class QueueServer {
     printf("tid=%d, %s stop\n", CurrentThread::tid(), CurrentThread::name());
   }
 
-  BlockingQueue<std::string> queue_;
   CountDownLatch             latch_;
+  BoundedBlockingQueue<std::string> queue_;
   boost::ptr_vector<Thread> threads_;
-}; // class QueueServer
+}; // class QueueServer2
 
-TEST(BlockingQueue, Test) {
+TEST(BoundBlockingQueue, Test) {
   printf("pid=%d, tid=%d\n", getpid(), CurrentThread::tid());
-  QueueServer server(5);
+  QueueServer2 server(5);
   server.run(100);
   server.joinAll();
 
