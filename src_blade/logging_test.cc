@@ -68,7 +68,7 @@ void bench() {
   Timestamp start(Timestamp::now());
   g_total = 0;
 
-  const int batch = 1000 * 1000;
+  const int batch = 1000 * 1;
   std::string longStr(3000, 'X');
 
   longStr += " ";

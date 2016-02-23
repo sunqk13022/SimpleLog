@@ -1,4 +1,5 @@
 #ifndef SIMPLE_LOG_FILE_H_
+#define SIMPLE_LOG_FILE_H_
 
 #include <string>
 #include <boost/noncopyable.hpp>

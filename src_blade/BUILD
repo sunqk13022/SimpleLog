@@ -17,9 +17,10 @@ cc_library(
 cc_test(
     name = 'simple_log_test',
     srcs = [
-        'log_stream_test.cc',
-        'time_stamp_test.cc',
-        'logging_test.cc',
+        #'log_stream_test.cc',
+        #'time_stamp_test.cc',
+        #'logging_test.cc',
+        'async_logging_test.cc',
     ],
     deps = [
         ':simple_log',
