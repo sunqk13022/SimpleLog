@@ -69,7 +69,7 @@ LogFile::LogFile(const std::string& basename, size_t rollSize, bool threadSafe, 
     lastRoll_(0),
     lastFlush_(0)
 {
-  assert(basename_.find('/') == std::npos);
+  assert(basename_.find('/') == std::string::npos);
   rollFile();
 }
 

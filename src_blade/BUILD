@@ -37,3 +37,14 @@ cc_test(
     ],
 )
 
+cc_binary(
+   name='ptr_contain_test',
+   srcs=[
+     'ptr_contain_test.cc',
+   ],
+   deps=[
+     '//thirdparty/gflags:gflags',
+     '//thirdparty/glog:glog',
+     '#rt',
+   ],
+)
