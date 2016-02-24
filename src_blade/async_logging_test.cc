@@ -7,6 +7,7 @@
 #include "time_stamp.h"
 #include "logging.h"
 #include "async_logging_queue.h"
+#include "async_logging_double_buffering.h"
 
 namespace simple_log {
 
@@ -32,7 +33,7 @@ void bench(ASYNC* log) {
   std::string logStr(3000, 'X');
   logStr += " ";
 
-  for (int t = 0; t < 30; ++t) {
+  for (int t = 0; t < 5; ++t) {
     Timestamp start = Timestamp::now();
     for (int i = 0; i < kBatch; ++i) {
       LOG_INFO << "Hello 0123456789" << " abcdefghijklmnopqrstuvwxyz "
@@ -95,6 +96,19 @@ TEST(AsyncLoggingQueue, UnboundedQueueL) {
   }
 
   AsyncLoggingUnboundedQueueL log2("log3", kRollSize);
+  log2.start();
+  bench(&log2);
+  log2.stop();
+}
+
+TEST(AsyncLoggingQueue, DoubleUnboundedQueue) {
+  {
+    size_t kOneGB = 1024 * 1024 * 1024;
+    rlimit r1 = { 2.0 * kOneGB, 2.0 * kOneGB };
+    setrlimit(RLIMIT_AS, &r1);
+  }
+
+  AsyncLoggingDoubleBuffering log2("log5", kRollSize);
   log2.start();
   bench(&log2);
   log2.stop();
